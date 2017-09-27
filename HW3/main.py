@@ -105,12 +105,12 @@ p2.xaxis.formatter=p2.yaxis.formatter=NumeralTickFormatter(format='$ 0,0')
 
 # Add a hover tool to the scatter plot
 hover = HoverTool(
-        tooltips=[
-            ('Index: ', '@index'),
-            ('x: ', '@x{$ 0,0}'),
-            ('y: ', '@y{$ 0,0}')
-        ]
-    )
+    tooltips=[
+        ('Index: ', '@index'),
+        ('x: ', '@x{$ 0,0}'),
+        ('y: ', '@y{$ 0,0}')
+    ]
+)
 p1.add_tools(hover)
 p2.add_tools(hover)
 
