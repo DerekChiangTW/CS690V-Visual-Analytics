@@ -33,6 +33,7 @@ def process_data():
     convert_categorical_data(df)
 
     # Separate input features into different categories
+    disease_features = ['cancer', 'diabetes', 'heart_disease']
     pet_features = ['cat', 'dog']
     hand_features = ['left_hand', 'right_hand']
 
@@ -48,7 +49,7 @@ def process_data():
     food_features = [col for col in df.columns if (
         re.search(text, col)) and (col not in fruit_features)]
 
-    other_features = [col for col in df.columns if col not in pet_features +
+    other_features = [x for x in df.columns if x not in disease_features + pet_features +
                       hand_features + smoke_features + fruit_features + food_features]
 
     # Create a dict to store all categories
