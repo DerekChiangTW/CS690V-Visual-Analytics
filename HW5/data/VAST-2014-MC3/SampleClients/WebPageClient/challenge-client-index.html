@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			var vastURL = "hostname.domain:80";
+			var ws = new WebSocket('ws://' + vastURL);
+			var uid = "mickeymouse" || prompt("uid");
+			var segment = 0 || prompt("segment");
+			var reset = false || confirm("reset?");
+			var ws = new WebSocket('ws://' + vastURL);
+
+			// This is the initial handler for the client
+			// This ensures that the server acknowledges
+			// our UID before we try to handle messages
+			var inSetupPhase = true;
+
+			// Register a function to handle each message
+			ws.addEventListener('message', function(data) {
+
+				// get the payload from the message
+				data = JSON.parse(data.data);
+
+				console.log("received: ", data);
+
+				// handle control messages
+				if(data.type === 'control')
+				{
+					console.log("control state ", data.body[0].state, " : ", data.body[0].msg);
+				}
+				else
+				{
+					// each message can have multiple posts
+					data.body.forEach(function(msg) {
+
+						// process each post
+						var el = document.createElement('li');
+						el.innerHTML = Object.keys(msg).map(function(key) {
+							return key + ": " + msg[key];
+						}).join(', ');
+						responses.appendChild(el);
+
+					});
+				}
+			});
+
+			// Once the connection is open, send the UID
+			ws.addEventListener('open', function() {
+				ws.send(JSON.stringify({
+					uid: uid,
+					segment: segment,
+					reset : reset
+				}));
+				inSetupPhase = false;
+			});
+
+			console.log ( "uid sent");
+
+			// If the connection closes, take note
+			ws.addEventListener('close', function() {
+				console.log('connection closed - complete');
+			});
+		</script>
+	</head>
+	<body>
+		<ol id="responses">
+		</ol>
+	</body>
+</html>
