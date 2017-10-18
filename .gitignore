@@ -1,5 +1,9 @@
+# Byte-compiled
+__pycache__/
+*.pyc
+
+# IPython Notebook
 .ipynb_checkpoints
-.ipynb_checkpoints/.
-.ipynb_checkpoints/
+
 *.pages
 *.pdf
