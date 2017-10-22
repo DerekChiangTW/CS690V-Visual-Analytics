@@ -7,17 +7,19 @@ import networkx as nx
 from bokeh.io import curdoc
 from bokeh.plotting import figure
 from bokeh.layouts import column, row, widgetbox
-from bokeh.models import ColumnDataSource, Slider, HoverTool
+from bokeh.models.glyphs import Text
+from bokeh.models import ColumnDataSource, Slider, HoverTool, LabelSet
 from utils import extract_hashtags, count_cooccurence
 from bokeh.models.widgets import Select, Div
 from sklearn.cluster import KMeans, SpectralClustering
+
 
 THRESHOLD = 700
 METHODS = ['K-means', 'Spectral']
 COLORS = ['#ae254a', '#007380', '#4364ae', '#f9d500',
           '#ff7256', '#800080', '#0e2f44', '#f442cb']
-PLOT1_PARAM = {'plot_height': 300, 'plot_width': 500, 'toolbar_location': 'above'}
-PLOT2_PARAM = {'plot_height': 400, 'plot_width': 600, 'toolbar_location': 'above'}
+PLOT1_PARAM = {'plot_height': 400, 'plot_width': 400, 'toolbar_location': None}
+PLOT2_PARAM = {'plot_height': 400, 'plot_width': 600, 'toolbar_location': None}
 DEFAULT_TICKERS = ['PageRank',
                    'Degree centrality',
                    'Closeness centrality',
@@ -92,31 +94,34 @@ co_occurence = count_cooccurence(tweets, word2id)
 words = list(word2id.keys())
 nWords = len(words)
 
-# Set up random position for the nodes
-np.random.seed(0)
-pos = np.random.rand(nWords, 2)
+# Set up position for the nodes
+theta = 2 * np.pi / nWords
+circ = [i * theta for i in range(nWords)]
+coord_x = [np.cos(i) for i in circ]
+coord_y = [np.sin(i) for i in circ]
+#pos = np.random.rand(nWords, 2)
 
 # Set up data source
-s1 = ColumnDataSource(data=dict(x=pos[:, 0], y=pos[:, 1], hashtag=words))
+s1 = ColumnDataSource(data=dict(x=coord_x, y=coord_y, hashtag=words))
 s2 = ColumnDataSource(data=dict(x=[], y=[], hashtag=[], colors=[]))
 
 # Draw the plots
-hover1 = HoverTool(tooltips=[('Hashtag: ', '@hashtag')])
-hover2 = HoverTool(tooltips=[('Hashtag: ', '@hashtag')])
+hover1 = HoverTool(tooltips=[('Hashtag', '@hashtag')])
+hover2 = HoverTool(tooltips=[('Hashtag', '@hashtag')])
 p1 = figure(title="Hashtag co-occurence graph", tools=[hover1], **PLOT1_PARAM)
 p2 = figure(tools='', **PLOT2_PARAM)
 p2.circle('x', 'y', source=s2, size=20, color='colors', alpha=0.8)
+
+# Draw the edges between the nodes
+for (n1, n2), count in co_occurence.items():
+    n1_x, n1_y = coord_x[n1], coord_y[n1]
+    n2_x, n2_y = coord_x[n2], coord_y[n2]
+    p1.line([n1_x, n2_x], [n1_y, n2_y], line_color="#949494")
 scatter = p1.circle('x', 'y', source=s1, size=20)
 
 # Add a hover tool to the co-occurence plot
 hover1.renderers.append(scatter)
 p2.add_tools(hover2)
-
-# Draw the edges between the nodes
-for (n1, n2), count in co_occurence.items():
-    n1_x, n1_y = pos[n1, 0], pos[n1, 1]
-    n2_x, n2_y = pos[n2, 0], pos[n2, 1]
-    p1.line([n1_x, n2_x], [n1_y, n2_y])
 
 # Set up figure parameters
 p1.grid.visible = False
