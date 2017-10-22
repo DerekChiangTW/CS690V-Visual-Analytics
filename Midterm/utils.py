@@ -8,22 +8,22 @@ from itertools import combinations
 def extract_hashtags(tweets, threshold):
     """ Extract hashtags from tweets and index them.
 
-        Parameters
-        ----------
-            tweets : list of strings
-                Raw tweet text.
+    Parameters
+    ----------
+        tweets : list of strings
+            Raw tweet text.
 
-            threshold : int
-                Set the threshold for the count of hashtag. A hashtag
-                is extracted if its count is higher than the threshold.
+        threshold : int
+            Set the threshold for the count of hashtag. A hashtag
+            is extracted if its count is higher than the threshold.
 
-        Returns
-        -------
-            id2word : dict
-                Index the extracted hashtags.
+    Returns
+    -------
+        id2word : dict
+            Index the extracted hashtags.
 
-            word2id : dict
-                Provide a look-up dictionary.
+        word2id : dict
+            Provide a look-up dictionary.
 
     """
     hashtag_count = dict()
@@ -43,19 +43,19 @@ def extract_hashtags(tweets, threshold):
 def count_cooccurence(tweets, word2id):
     """ Count the co-occurence of the hashtags.
 
-        Parameters
-        ----------
-            tweets : list of strings
-                Raw tweet text.
+    Parameters
+    ----------
+        tweets : list of strings
+            Raw tweet text.
 
-            word2id : dict
-                A look-up dictionary to match the hashtag with indices.
+        word2id : dict
+            A look-up dictionary to match the hashtag with indices.
 
-        Returns
-        -------
-            co_occurence : dict
-                A dictionary which counts the co-occurence of hashtags.
-                The keys are tuples of hashtag indices and values are the count.
+    Returns
+    -------
+        co_occurence : dict
+            A dictionary which counts the co-occurence of hashtags.
+            The keys are tuples of hashtag indices and values are the count.
 
     """
     co_occurence = dict()
