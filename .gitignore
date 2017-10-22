@@ -7,3 +7,5 @@ __pycache__/
 
 *.pages
 *.pdf
+.DS_Store
+.vscode/
