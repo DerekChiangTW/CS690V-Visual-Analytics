@@ -4,7 +4,7 @@ import re
 from sklearn.feature_extraction.text import CountVectorizer
 from bokeh.models import ColumnDataSource, Select, Slider
 from bokeh.models.widgets import RadioGroup, Select, TextInput, Panel, Tabs
-from bokeh.models import CustomJS
+from bokeh.models import CustomJS, HoverTool
 from bokeh.layouts import widgetbox, row, column, layout
 from bokeh.plotting import figure
 from sklearn.cluster import Birch, KMeans
@@ -75,13 +75,16 @@ def get_colors(labels):
 colors_km = get_colors(predictions_km)
 colors = get_colors(predictions)
 
-km_data = ColumnDataSource(data=dict(colors=colors_km, x=tsne_vecs[:,0], y=tsne_vecs[:,1]))
-km_plot=figure(plot_width=300, plot_height=300, toolbar_location='right', title='KMeans')
+hover1 = HoverTool(tooltips=[('Tweet', '@tweet')])
+hover2 = HoverTool(tooltips=[('Tweet', '@tweet')])
+
+km_data = ColumnDataSource(data=dict(colors=colors_km, x=tsne_vecs[:,0], y=tsne_vecs[:,1], tweet=tweets))
+km_plot=figure(plot_width=300, plot_height=300, toolbar_location='right', title='KMeans', tools=[hover1])
 km_plot.circle('x','y', line_color='colors', fill_color='colors', source=km_data)
 s_slider = Slider(title="Num of cluster for KMeans", value=7.0, start=2.0, end=10.0, step=1, width=250)
 
-brc_data = ColumnDataSource(data=dict(colors=colors, x=tsne_vecs[:,0], y=tsne_vecs[:,1]))
-brc_plot=figure(plot_width=300, plot_height=300, toolbar_location='right', title='Birch')
+brc_data = ColumnDataSource(data=dict(colors=colors, x=tsne_vecs[:,0], y=tsne_vecs[:,1], tweet=tweets))
+brc_plot=figure(plot_width=300, plot_height=300, toolbar_location='right', title='Birch', tools=[hover2])
 brc_plot.circle('x','y', line_color='colors', fill_color='colors', source=brc_data)
 k_slider = Slider(title="Num of cluster for Birch", value=7.0, start=2.0, end=10.0, step=1, width=250)
 
