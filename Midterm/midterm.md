@@ -74,9 +74,9 @@ Interactive version of it can be see running:
 
 Shown in wordcloud.ipynb
 
- * Compare worldclouds between raw text & preprocessed text--Textpreprocessing changes high_frequency words in tweets
+ * Compare worldclouds between raw text & preprocessed text--Textpreprocessing changes high\_frequency words in tweets
  * Reduce parameter max_font_size to see more high_frequency words 
- * Verify high_frequency words by changing max_words values  
+ * Verify high\_frequency words by changing max_words values  
  * Add stopwords
  * Show worldcloud in different shapes
  
