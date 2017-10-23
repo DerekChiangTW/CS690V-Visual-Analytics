@@ -32,13 +32,13 @@ After we construct the co-occurenece graph, we apply several network analysis me
 * Closeness centrality
 * Betweenness centrality
 
-![alt text](https://github.com/DerekChiangTW/CS690V-Visual-Analytics/blob/master/Midterm/src/images/hashtag_graph.png "")
+![alt text](./src/images/hashtag_graph.png "")
 
 ### Clustering
 
 These scores were treated as the features of the hashtags. Then, we use K-means and SpectralClustering algorithm to cluster the hashtags. We build an interactive scatter plot to visualize our results.
 
-![alt text](https://github.com/DerekChiangTW/CS690V-Visual-Analytics/blob/master/Midterm/src/images/hashtag_scatter.png "")
+![alt text](./src/images/hashtag_scatter.png "")
 
 Interactive version of it can be see running:
 
@@ -73,7 +73,7 @@ Shown in wordcloud.ipynb
 **ranking word**
 Here we rank the tokenized word using tf-idf with threshold 0.001. Run the script tfidf.py and a plot blow will be generated.
 
-<img src='tfidf.png' height=500>
+<img src='./src/images/tfidf.png' height=500>
 
 ### Clustering
 
@@ -89,12 +89,12 @@ Slide bars of adjusting the number of clusters are embedded for interactive visu
 
 * As we may see from the following example graph, two clusteing algorithms acheives similar results in terms of generated clusters.
 
-<img src='cluster1.png' height=400>
+<img src='./src/images/cluster1.png' height=400>
 
 
 * Meanwhile, Bag of Word model yields good performance of representing tweets in vector. For example, the tweets in most left clusters are mainly talking about advertivesements and most of them share similar vocabulary.
 
-<img src='cluster2.png' height=400>
+<img src='./src/images/cluster2.png' height=400>
 
 
 
