@@ -37,7 +37,7 @@ Interactive version of it can be see running:
    
     bokeh serve --show hashtag.py
 
-### Explaination
+### Explanation
 
 
 ## Analyze text in tweets
@@ -64,5 +64,5 @@ run the following command
 **visualization**
 Slide bars of adjusting the number of clusters are embedded for interactive visualization.
 
-### Explaination
+### Explanation
 
