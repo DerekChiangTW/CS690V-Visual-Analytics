@@ -57,11 +57,14 @@ Interactive version of it can be see running:
 ## Objective 2 - Analyze text in tweets
 * package wordcloud is required.
 
-### Preprocessing 
+### Text Preprocessing 
 
-* all numbers are replaced with a speical symbol \$NUM\$
-* special character like #, ! are removed
+* Remove all emojis and symbols at first
+* Conver text to lower 
 * URL links are removed
+* User_names are removed
+* Punctuations like #, !, /,\,are removed
+* remove numerical numbers  
 * tokenization by space
 
 ### Visualizaing Text
@@ -69,6 +72,11 @@ Interactive version of it can be see running:
 **word cloud**
 
 Shown in wordcloud.ipynb
+ * Compare worldclouds between raw text & preprocessed text--Textpreprocessing changes high_frequency words in tweets
+ * Reduce parameter max_font_size to see more high_frequency words 
+ * Verify high_frequency words by changing max_words values  
+ * Add stopwords
+ * Show worldcloud in different shapes
 
 **ranking word**
 Here we rank the tokenized word using tf-idf with threshold 0.001. Run the script tfidf.py and a plot blow will be generated.
