@@ -32,7 +32,7 @@ After we construct the co-occurenece graph, we apply several network analysis me
 * Closeness centrality
 * Betweenness centrality
 
-![alt text](./src/images/hashtag_graph.png "")
+<img src='./src/images/cluster2.png' height=400>
 
 ### Clustering
 
