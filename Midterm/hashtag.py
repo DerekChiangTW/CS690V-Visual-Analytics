@@ -9,7 +9,7 @@ from bokeh.plotting import figure
 from bokeh.layouts import column, row, widgetbox
 from bokeh.models.glyphs import Text
 from bokeh.models import ColumnDataSource, Slider, HoverTool, LabelSet
-from utils import extract_hashtags, count_cooccurence
+from scripts.utils import extract_hashtags, count_cooccurence
 from bokeh.models.widgets import Select, Div
 from sklearn.cluster import KMeans, SpectralClustering
 
@@ -187,7 +187,7 @@ alg_ticker.on_change('value', setting_change)
 cluster_slider.on_change('value', setting_change)
 
 # Set up layout
-desc = Div(text=open('description.html').read(), width=580, height=180)
+desc = Div(text=open('./scripts/description.html').read(), width=580, height=180)
 p2_widget = row(p2, widgetbox(x_ticker, y_ticker, alg_ticker, cluster_slider))
 layout = column(desc, p1, p2_widget)
 
