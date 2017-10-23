@@ -78,7 +78,8 @@ Here we rank the tokenized word using tf-idf with threshold 0.001. Run the scrip
 ### Clustering
 
 Each tweet is represented using a word-count vectors.Basically, two cluster algorithms KMeans and Birch are employed. To visualize the high-dimensional vectors, t-sne is used to reduce the dimentionality to 2d so that they can be easily plotted.
-run the following command to generate the graph(may take a while)
+
+Run the following command to generate the graph(may take a while)
 
 	bokeh serve --show cluster.py
 
