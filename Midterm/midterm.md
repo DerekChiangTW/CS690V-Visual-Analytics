@@ -78,6 +78,9 @@ Shown in wordcloud.ipynb
  * Verify high_frequency words by changing max_words values  
  * Add stopwords
  * Show worldcloud in different shapes
+ 
+<img src='./src/images/worldcloud.png' height=500>
+
 
 **ranking word**
 Here we rank the tokenized word using tf-idf with threshold 0.001. Run the script tfidf.py and a plot blow will be generated.
