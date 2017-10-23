@@ -27,6 +27,7 @@ Out first goal it to analyze hashtags in tweets and rank them using different me
 ### Visualizaing Text
 
 After we construct the co-occurenece graph, we apply several network analysis metrics to evaluate the importance of these hashtags:
+
 * Weighted PageRank
 * Degree centrality
 * Closeness centrality
