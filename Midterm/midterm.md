@@ -32,9 +32,13 @@ After we construct the co-occurenece graph, we apply several network analysis me
 * Closeness centrality
 * Betweenness centrality
 
+![alt text](https://github.com/DerekChiangTW/CS690V-Visual-Analytics/blob/master/Midterm/src/images/hashtag_graph.png "")
+
 ### Clustering
 
 These scores were treated as the features of the hashtags. Then, we use K-means and SpectralClustering algorithm to cluster the hashtags. We build an interactive scatter plot to visualize our results.
+
+![alt text](https://github.com/DerekChiangTW/CS690V-Visual-Analytics/blob/master/Midterm/src/images/hashtag_scatter.png "")
 
 Interactive version of it can be see running:
 
@@ -51,7 +55,7 @@ Interactive version of it can be see running:
 
 
 ## Objective 2 - Analyze text in tweets
-package wordcloud is required.
+* package wordcloud is required.
 
 ### Preprocessing 
 
