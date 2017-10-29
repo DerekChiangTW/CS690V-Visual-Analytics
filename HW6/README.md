@@ -55,7 +55,7 @@ Both of the plots are connected to help visualization.
 Users can also select a period of time on the time-series graph. If the hashtags in the co-occurence 
 graph appeared in that period of time, the color of the circle will turn red.
 
-<img src='./src/images/select.png' height=400>
+<img src='./src/images/select.png' height=300>
 
 
 Interactive version of it can be see running:
