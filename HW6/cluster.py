@@ -9,7 +9,7 @@ from bokeh.layouts import widgetbox, row, column, layout
 from bokeh.plotting import figure
 from sklearn.cluster import Birch, KMeans
 from sklearn.manifold import TSNE
-from utils import preprocess_a_tweet
+from scripts.utils import preprocess_a_tweet
 import datetime
 import pdb
 
