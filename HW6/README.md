@@ -98,22 +98,22 @@ We think this combination of visualization will be beneficial for detecting even
 
 ## Objective 3 - Analyze Geolocalization on Basemap
 * package basemap is required
-* plot maps in geo_map.ipynb
-* visualization in bokeh
-
-Run the following command to generate the graph(may take a while)
-
-    bokeh serve --show geo.py
 
 To anylisy the twitter geolocalization,eg.utilization density distribution,we need to visualize twitter users' geographical location on the real map,that is the basemap.
 
 ### basemap
+* plot maps in geo_map.ipynb
+
 The detailed basemap is in consist of coastlines,continents,country boundaries,states and the boundary of the map.Then we can draw maps both in 2D, plus axis labels, and 3D,looking down at the location where map shows most points.According to the result map, we can have a good understand about the twitter geolocalization.
 
 <img src='./src/images/2D.png' height=250>
 <img src='./src/images/3D.png' height=250>
 
 ### bokeh
+
+Run the following command to generate the graph(may take a while)
+
+    bokeh serve --show geo.py
 At the same time, we visualize the repeat times for geolocalization location in bokeh, the size of the points represent the frequency that location is mentioned in twitter contents.
 
 <img src='./src/images/geo_bokeh.png' height=250> 
