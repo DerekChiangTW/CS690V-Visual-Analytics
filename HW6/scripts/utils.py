@@ -5,6 +5,13 @@ import re
 from itertools import combinations
 
 
+def checkNaN(data):
+    """ Check if the data contains NaN values. """
+    if data.isnull().values.any():
+        N = data.isnull().sum().sum()
+        print("There are {} missing values.".format(N))
+
+
 def preprocess(tweets):
     for i, t in enumerate(tweets):
         t = t.lower()
@@ -16,10 +23,26 @@ def preprocess(tweets):
             tweets[i] = t
 
     for i, t in enumerate(tweets):
-        tweets[i] = re.sub(r'[?|$|.|!|#|\-|"|\n|,|@|(|)]', r'', tweets[i])
+        tweets[i] = re.sub(r'[?|$|.|!|#|\-|"|\n|,|@|(|)]', r' ', tweets[i])
         tweets[i] = re.sub(r'https?:\/\/.*[\r\n]*', '', tweets[i], flags=re.MULTILINE)
         tweets[i] = re.sub(r'[0|1|2|3|4|5|6|7|8|9|:]', r'$NUM$', tweets[i])
     return tweets
+
+
+def get_tagCount(tweets, threshold=0):
+    """ Extract hashtags from tweets and index them. """
+    tag_count = dict()
+    if isinstance(tweets, list):
+        for tweet in tweets:
+            for tag in re.findall(r"#\w+[\w'-]*\w+", tweet.lower()):
+                tag_count[tag] = tag_count.get(tag, 0) + 1
+    else:
+        for tag in re.findall(r"#\w+[\w'-]*\w+", tweets.lower()):
+            tag_count[tag] = tag_count.get(tag, 0) + 1
+
+    # Extract hashtags with count higher than threshold
+    top_tags = {t: tag_count[t] for t, c in tag_count.items() if c > threshold}
+    return top_tags
 
 
 def extract_hashtags(tweets, threshold):
@@ -45,7 +68,7 @@ def extract_hashtags(tweets, threshold):
     """
     hashtag_count = dict()
     for tweet in tweets:
-        for tag in re.findall('#([\w\d]+)', tweet.lower()):
+        for tag in re.findall(r"#\w+[\w'-]*\w+", tweet.lower()):
             hashtag_count[tag] = hashtag_count.get(tag, 0) + 1
 
     # Extract hashtags with count higher than threshold
