@@ -14,7 +14,7 @@ import datetime
 import pdb
 
 # Read in dataset
-fpath = './../data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
+fpath = './data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
 df = pd.read_excel(fpath, sheetname='Stream')
 tweet_df = df["Tweet content"][:1000]
 
