@@ -100,7 +100,7 @@ def count_cooccurence(tweets, word2id):
     """
     co_occurence = dict()
     for tweet in tweets:
-        matches = re.findall('#([\w\d]+)', tweet.lower())
+        matches = re.findall(r"#\w+[\w'-]*\w+", tweet.lower())
         indices = sorted([word2id[word] for word in matches if word in word2id.keys()])
         for pair in combinations(indices, 2):
             co_occurence[pair] = co_occurence.get(pair, 0) + 1

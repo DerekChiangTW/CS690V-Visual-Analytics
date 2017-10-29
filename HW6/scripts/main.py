@@ -10,7 +10,6 @@ from bokeh.layouts import column, row, widgetbox
 from bokeh.models.glyphs import Text
 from bokeh.models import ColumnDataSource, Slider, HoverTool, LabelSet
 from bokeh.models.widgets import Select, Div
-from sklearn.cluster import KMeans, SpectralClustering
 from utils import get_tagCount, extract_hashtags, count_cooccurence
 
 pd.options.mode.chained_assignment = None
@@ -34,7 +33,6 @@ def get_data(time):
 fpath = './../data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
 df = pd.read_excel(fpath, sheetname='Stream')
 
-
 # Preprocess the data
 time_df = df['Tweet content']
 time_df.index = pd.to_datetime(df['Date'] + ' ' + df['Hour'])
@@ -42,7 +40,6 @@ id2word, word2id = extract_hashtags(time_df, threshold)
 co_occurence = count_cooccurence(time_df, word2id)
 words = list(word2id.keys())
 nWords = len(words)
-
 
 # Set up position for the nodes
 theta = 2 * np.pi / nWords
@@ -65,7 +62,8 @@ p1 = figure(title="Hashtag co-occurence graph", tools=[hover1], **p1_params)
 for (n1, n2), count in co_occurence.items():
     n1_x, n1_y = coord_x[n1], coord_y[n1]
     n2_x, n2_y = coord_x[n2], coord_y[n2]
-    p1.line([n1_x, n2_x], [n1_y, n2_y], line_color="#949494", line_width=2)
+    p1.line([n1_x, n2_x], [n1_y, n2_y], line_color="#949494")
+scatter = p1.circle('x', 'y', source=s1, size=20)
 scatter = p1.circle('x', 'y', source=s1, color='color', size=20)
 hover1.renderers.append(scatter)
 
@@ -82,7 +80,7 @@ p1.title.text_font_size = p2.title.text_font_size = '16px'
 
 
 # Set up widgets
-time_ticker = Select(title='Time:', value='Week', options=time_unit)
+time_ticker = Select(title='Time:', value='Day', options=time_unit)
 
 
 def time_change(attrname, old, new):
@@ -90,7 +88,6 @@ def time_change(attrname, old, new):
 
 
 def selection_change(attrname, old, new):
-    # pass
     selected = s2.selected['1d']['indices']
 
     hashtags = []
@@ -100,7 +97,7 @@ def selection_change(attrname, old, new):
             hashtags += data[index]
         hashtags = set(hashtags)
 
-    new_color = ['#1F77B4'] * nWords
+    new_color = color
     for t in hashtags:
         if t in word2id.keys():
             new_color[word2id[t]] = '#ae254a'
