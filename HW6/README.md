@@ -10,7 +10,7 @@
 [Costco Wholesale Corp. Twitter Dataset](http://followthehashtag.com/datasets/nasdaq-100-companies-free-twitter-dataset/)
 
 
-### Main Challenge
+## Main Challenge
 Since we pick VAST Challenge 2014: MC3 as our final project, we have to deveopled several analytics tools
 to deal with streaming data. Our system must focus on time series analysis to identify upcoming events or
 suspicious activities. The main problem we might have to solve is:
@@ -30,29 +30,37 @@ connections in the tweets.
 
 ### Procedure
 
-* Extract hashtags based on regular expression.
-* Draw a time-series plot to observe the distribution of hashtags. In this homework, we only explore the total count of
-hashtags in a period of time. To get more information from the graph, we intend to draw the distribution of 
-some important hashtags in the future.
-* We construct a weighted, undirected graph based on their co-occurence in the tweets to visualize the relations between
-hashtags. 
+* Extract hashtags based on regular expression. (We set a threshold to extract the most frequent ones.)
+* Then, we construct a weighted, undirected graph based on their co-occurence in the tweets to visualize their relations.
+* Draw a time-series plot to observe the distribution of total count. The total count is the sum over all the 
+hashtags, which also includes the less frequent ones.
+* Finally, we plot a time-series distibution of the most frequent hashtags individually to detect the suspicious
+events in each time period.
+
 
 ### Visualizaing Text
 
-We only construct the co-occurenece graph based on the hashtags with high frequency in the tweets.
-Then, we plot a time-series graph to observe the distribution of all the tweets.
-The graph can select time unit, such as 'Day', 'Week', or 'Month' to observe different distributions.
-Users can select a period of time on the time-series graph. If the hashtags in the co-occurence 
-graph appeared in that period of time, the color of the circle will turn red.
+The co-occurenece graph reveals the relationships between hashtags. We also change the line width to
+indicate the weights of each connections.
+By hovering around the circle, we can clearly understand their relations.
 
+<img src='./src/images/co_occur.png' height=400>
+
+The time-series plots can select time unit, such as 'Day', 'Week', or 'Month' to observe different distributions.
+We can also select a specific hashtag to observe its distribution over time.
+Both of the plots are connected to help visualization.
 
 <img src='./src/images/time_series.png' height=600>
+
+Users can also select a period of time on the time-series graph. If the hashtags in the co-occurence 
+graph appeared in that period of time, the color of the circle will turn red.
+
+<img src='./src/images/select.png' height=600>
+
 
 Interactive version of it can be see running:
 
     bokeh serve --show hashtag.py
-        
-(ps. Note that it might take a few minutes to read in the dataset.)
 
 
 ## Objective 2 - Analyze text in tweets
