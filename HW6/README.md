@@ -56,59 +56,37 @@ Interactive version of it can be see running:
 
 
 ## Objective 2 - Analyze text in tweets
-* package wordcloud is required.
+* package pandas,sklearn are required.
+* bokeh server is used for visualization
 
-### Text Preprocessing 
+Run the following command to generate the graph(may take a while)
+
+	bokeh serve --show cluster.py
+
+The basic strategy to detect event in tweets is to understanding what's happening in a period of time from tweets. Hence, we develop an interactive visualization that consists of selecting time window and clustering algorithms to visualize these tweets. Other visualization techniques like hover tool, slider to select number of clusters are also employed here.
+
+Note that update of the graph after selecting time windown may take a while due to the large number of data we use.
+
+### Text Preprocessing of twitter
 
 * Remove all emojis and symbols at first
 * Convert text to lower 
 * URL links are removed
 * User_names are removed
 * Punctuations like #, !, /,\,are removed
-* Remove numerical numbers  
 * Tokenization by space
-
-### Visualizaing Text
-
-**word cloud**
-
-Shown in wordcloud.ipynb
-
- * Compare worldclouds between raw text & preprocessed text--Textpreprocessing changes high\_frequency words in tweets
- * Reduce parameter max_font_size to see more high_frequency words 
- * Verify high\_frequency words by changing max_words values  
- * Add stopwords
- * Show worldcloud in different shapes
- 
-<img src='./src/images/worldcloud.png' height=500>
-
-
-**ranking word**
-Here we rank the tokenized word using tf-idf with threshold 0.001. Run the script tfidf.py and a plot blow will be generated.
-
-<img src='./src/images/tfidf.png' height=500>
 
 ### Clustering
 
-Each tweet is represented using a word-count vectors.Basically, two cluster algorithms KMeans and Birch are employed. To visualize the high-dimensional vectors, t-sne is used to reduce the dimentionality to 2d so that they can be easily plotted.
-
-Run the following command to generate the graph(may take a while)
-
-	bokeh serve --show cluster.py
-
-**visualization**
-Slide bars of adjusting the number of clusters are embedded for interactive visualization. Tweets are visible through hover tool.
+Each tweet is represented using a word-count vectors based on Bag-of-Word model. Cluster algorithms of KMeans is employed. To visualize the high-dimensional vectors, t-sne is used to reduce the dimentionality to 2d so that they can be easily plotted.
 
 ### Explanation
 
-* As we may see from the following example graph, two clusteing algorithms acheives similar results in terms of generated clusters.
+<img src='./src/images/cluster.png' height=500>
 
-<img src='./src/images/cluster1.png' height=400>
+Firstly, we select the time window of tweets. Then with the help of clutering and hover tool, we can easily infer some information from this visualization. For example, the green cluster shown in the graph above mainly talks about prices of products. 
 
-
-* Meanwhile, Bag of Word model yields good performance of representing tweets in vector. For example, the tweets in most left clusters are mainly talking about advertivesements and most of them share similar vocabulary.
-
-<img src='./src/images/cluster2.png' height=400>
+We think this combination of visualization will be beneficial for detecting event in tweets.
 
 
 
