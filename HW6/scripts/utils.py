@@ -14,19 +14,22 @@ def checkNaN(data):
 
 def preprocess(tweets):
     for i, t in enumerate(tweets):
-        t = t.lower()
-        if t.startswith("rt @"):
-            t = t[4:]
-            pos = t.find(":")
-            tweets[i] = t[: pos] + t[pos + 1:]
-        else:
-            tweets[i] = t
-
-    for i, t in enumerate(tweets):
-        tweets[i] = re.sub(r'[?|$|.|!|#|\-|"|\n|,|@|(|)]', r' ', tweets[i])
-        tweets[i] = re.sub(r'https?:\/\/.*[\r\n]*', '', tweets[i], flags=re.MULTILINE)
-        tweets[i] = re.sub(r'[0|1|2|3|4|5|6|7|8|9|:]', r'$NUM$', tweets[i])
+        tweets[i] = preprocess_a_tweet(t)
     return tweets
+
+def preprocess_a_tweet(t):
+    ret_str = None
+    t = t.lower()
+    if t.startswith("rt @"):
+        t = t[4:]
+        pos = t.find(":")
+        ret_str = t[: pos] + t[pos + 1:]
+    else:
+        ret_str = t
+    ret_str = re.sub(r'[?|$|.|!|#|\-|"|\n|,|@|(|)]', r' ', ret_str)
+    ret_str = re.sub(r'https?:\/\/.*[\r\n]*', '', ret_str, flags=re.MULTILINE)
+    # ret_str = re.sub(r'[0|1|2|3|4|5|6|7|8|9|:]', r'$NUM$', ret_str)
+    return ret_str
 
 
 def get_tagCount(tweets, threshold=0):
