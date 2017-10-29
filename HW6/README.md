@@ -61,11 +61,11 @@ Interactive version of it can be see running:
 
 Run the following command to generate the graph(may take a while)
 
-	bokeh serve --show cluster.py
+    bokeh serve --show cluster.py
 
-The basic strategy to detect event in tweets is to understanding what's happening in a period of time from tweets. Hence, we develop an interactive visualization that consists of selecting time window and clustering algorithms to visualize these tweets. Other visualization techniques like hover tool, slider to select number of clusters are also employed here.
+The basic strategy to detect events in tweets is to understand what's happening in a period of time from tweets. Hence, we develop an interactive visualization that consists of selecting time window and clustering algorithms to visualize these tweets. Other visualization techniques like hover tool, slider to select number of clusters are also employed here.
 
-Note that update of the graph after selecting time windown may take a while due to the large number of data we use.
+Note that update of the graph after selecting time window may take a while due to the large number of data we use.
 
 ### Text Preprocessing of twitter
 
@@ -78,15 +78,15 @@ Note that update of the graph after selecting time windown may take a while due 
 
 ### Clustering
 
-Each tweet is represented using a word-count vectors based on Bag-of-Word model. Cluster algorithms of KMeans is employed. To visualize the high-dimensional vectors, t-sne is used to reduce the dimentionality to 2d so that they can be easily plotted.
+Each tweet is represented using word-count vectors based on Bag-of-Word model. Cluster algorithms of KMeans is employed. To visualize the high-dimensional vectors, t-sne is used to reduce the dimensionality to 2d so that they can be easily plotted.
 
 ### Explanation
 
 <img src='./src/images/cluster.png' height=500>
 
-Firstly, we select the time window of tweets. Then with the help of clutering and hover tool, we can easily infer some information from this visualization. For example, the green cluster shown in the graph above mainly talks about prices of products. 
+Firstly, we select the time window of tweets. Then with the help of clustering and hover tool, we can easily infer some information from this visualization. For example, the green cluster shown in the graph above mainly talks about prices of products. 
 
-We think this combination of visualization will be beneficial for detecting event in tweets.
+We think this combination of visualization will be beneficial for detecting events in tweets.
 
 
 
