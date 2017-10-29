@@ -10,7 +10,7 @@
 [Costco Wholesale Corp. Twitter Dataset](http://followthehashtag.com/datasets/nasdaq-100-companies-free-twitter-dataset/)
 
 
-**Concepts**
+### Main Challenge
 Since we pick VAST Challenge 2014: MC3 as our final project, we have to deveopled several analytics tools
 to deal with streaming data. Our system must focus on time series analysis to identify upcoming events or
 suspicious activities. The main problem we might have to solve is:
@@ -46,7 +46,7 @@ Users can select a period of time on the time-series graph. If the hashtags in t
 graph appeared in that period of time, the color of the circle will turn red.
 
 
-<img src='./src/images/time_series.png' height=400>
+<img src='./src/images/time_series.png' height=600>
 
 Interactive version of it can be see running:
 
