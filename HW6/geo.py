@@ -9,8 +9,8 @@ from bokeh.io import output_notebook, show, curdoc
 
 
 # read in data
-# fpath = './data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
-fpath = 'export_dashboard_cost_2016_06_15_12_24_55.xlsx'
+fpath = './data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
+# fpath = 'export_dashboard_cost_2016_06_15_12_24_55.xlsx'
 df = pd.read_excel(fpath, sheetname='Country List')
 df.head()
 
