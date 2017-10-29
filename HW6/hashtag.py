@@ -10,7 +10,7 @@ from bokeh.layouts import column, row, widgetbox
 from bokeh.models.glyphs import Text
 from bokeh.models import ColumnDataSource, Slider, HoverTool, LabelSet
 from bokeh.models.widgets import Select, Div
-from utils import get_tagCount, extract_hashtags, count_cooccurence
+from scripts.utils import get_tagCount, extract_hashtags, count_cooccurence
 
 pd.options.mode.chained_assignment = None
 
@@ -30,7 +30,7 @@ def get_data(time):
 
 
 # Read in dataset
-fpath = './../data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
+fpath = './data/costco/export_dashboard_cost_2016_06_15_12_24_55.xlsx'
 df = pd.read_excel(fpath, sheetname='Stream')
 
 # Preprocess the data
@@ -97,7 +97,7 @@ def selection_change(attrname, old, new):
             hashtags += data[index]
         hashtags = set(hashtags)
 
-    new_color = color
+    new_color = ['#1F77B4'] * nWords
     for t in hashtags:
         if t in word2id.keys():
             new_color[word2id[t]] = '#ae254a'

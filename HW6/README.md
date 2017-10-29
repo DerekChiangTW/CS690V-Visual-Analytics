@@ -24,7 +24,7 @@ suspicious activities. The main problem we might have to solve is:
 Hashtags often provide rich information of the tweets, such as locations, activities or organizations.
 It is also easier for users to search relevant content using specific hashtags.
 Thus, our first step is to analyze hashtags to get a clearer picture of what is going on in the tweets.
-We wich to observe the distribution of hashtags to detect upcoming events.
+We wish to observe the distribution of hashtags to detect upcoming events.
 Moreover, to better understand the relations between hashtags, we draw a co-occurence plot to visualize their
 connections in the tweets. 
 
@@ -39,7 +39,7 @@ hashtags.
 
 ### Visualizaing Text
 
-We only onstruct the co-occurenece graph based on the hashtags with high frequency in the tweets.
+We only construct the co-occurenece graph based on the hashtags with high frequency in the tweets.
 Then, we plot a time-series graph to observe the distribution of all the tweets.
 The graph can select time unit, such as 'Day', 'Week', or 'Month' to observe different distributions.
 Users can select a period of time on the time-series graph. If the hashtags in the co-occurence 
@@ -50,7 +50,7 @@ graph appeared in that period of time, the color of the circle will turn red.
 
 Interactive version of it can be see running:
 
-    bokeh serve --show main.py
+    bokeh serve --show hashtag.py
         
 (ps. Note that it might take a few minutes to read in the dataset.)
 
