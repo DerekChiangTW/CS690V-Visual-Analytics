@@ -20,8 +20,8 @@ Latitude=df['Latitude']
 Longitude=df['Longitude']
 Keyword_Repetitions=df['Keyword Repetitions']
 Country=df['Country']
-source=ColumnDataSource(data=dict(x=Longitude,y=Latitude,Coun=Country,Keyword_Repetitions=Keyword_Repetitions))
-
+source=ColumnDataSource(data=dict(x=Longitude,y=Latitude,
+    Keyword_Repetitions=Keyword_Repetitions, country=Country))
 
 # set up colors using color_mapper
 palette=palette
@@ -30,12 +30,13 @@ color_mapper=LogColorMapper(palette=palette)
 
 #add  tools
 tools="pan,wheel_zoom,reset,save"
-p=figure(title="Twitter Geolocalization Interactive Plot",tools=tools,x_axis_location=None, y_axis_location=None)
+p=figure(title="Twitter Geolocalization Interactive Plot",tools=tools,x_axis_location=None, 
+y_axis_location=None)
 p.grid.grid_line_color = None
-p.circle(x=Longitude,y=Latitude,size=Keyword_Repetitions/5,color="red")
+p.circle('x','y', size=Keyword_Repetitions / 7, color="red", source=source)
 #add hover
 my_hover = HoverTool()
-my_hover.tooltips = [("Address of the point", "@x,@y")]
+my_hover.tooltips = [("Address", "@x,@y"), ("Country", "@country")]
 p.add_tools(my_hover)
 curdoc().add_root(p)
 

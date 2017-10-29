@@ -111,7 +111,7 @@ The detailed basemap consist of coastlines, continents, country boundaries,state
 
 ### bokeh
 
-Run the following command to generate the graph(may take a while)
+Run the following command to generate the graph
 
     bokeh serve --show geo.py
 At the same time, we visualize the repeat times for geolocalization location in bokeh, the size of the points represent the frequency that location is mentioned in twitter contents.
