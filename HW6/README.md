@@ -89,8 +89,13 @@ Firstly, we select the time window of tweets. Then with the help of clustering a
 We think this combination of visualization will be beneficial for detecting events in tweets.
 
 ## Objective 3 - Analyze Geolocalization on Basemap
-packet basemap is required
-plot maps in geo_map.ipynb
+* packet basemap is required
+* plot maps in geo_map.ipynb
+* visualization in bokeh
+
+Run the following command to generate the graph(may take a while)
+
+    bokeh serve --show geo.py
 
 To anylisy the twitter geolocalization,eg.utilization density distribution,we need to visualize twitter users' geographical location on the real map,that is the basemap.
 
@@ -99,5 +104,10 @@ The detailed basemap is in consist of coastlines,continents,country boundaries,s
 
 <img src='./src/images/2D.png' height=250>
 <img src='./src/images/3D.png' height=250>
+
+### bokeh
+At the same time, we visualize the repeat times for geolocalization location in bokeh, the size of the points represent the frequency that location is mentioned in twitter contents.
+
+<img src='./src/images/geo_bokeh.png' height=250> 
 
 
