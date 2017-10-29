@@ -3,13 +3,12 @@
 
 import numpy as np
 import pandas as pd
-import networkx as nx
 from bokeh.io import curdoc
 from bokeh.plotting import figure
-from bokeh.layouts import column, row, widgetbox
-from bokeh.models.glyphs import Text
-from bokeh.models import ColumnDataSource, Slider, HoverTool, LabelSet
-from bokeh.models.widgets import Select, Div
+from bokeh.layouts import column, row
+from bokeh.models.formatters import DatetimeTickFormatter
+from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.models.widgets import Select
 from scripts.utils import extract_hashtags, count_cooccurence
 
 pd.options.mode.chained_assignment = None
