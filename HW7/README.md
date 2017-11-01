@@ -1,4 +1,4 @@
-# Homework 6
+# Homework 7
 
 **Team members**
 1. Chao-Ching Chiang
@@ -7,7 +7,7 @@
 
 **Datasets**
 
-[Costco Wholesale Corp. Twitter Dataset](http://followthehashtag.com/datasets/nasdaq-100-companies-free-twitter-dataset/)
+[VAST Challenge 2014 Dataset](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3)
 
 
 ## Main Challenge
