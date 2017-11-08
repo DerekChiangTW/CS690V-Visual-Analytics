@@ -4,6 +4,7 @@
 import re
 import pandas as pd
 from itertools import combinations
+from datetime import datetime
 from nltk.tokenize import TweetTokenizer
 
 
@@ -33,6 +34,12 @@ def preprocess_a_tweet(t):
     ret_str = re.sub(r'https?:\/\/.*[\r\n]*', '', ret_str, flags=re.MULTILINE)
     # ret_str = re.sub(r'[0|1|2|3|4|5|6|7|8|9|:]', r'$NUM$', ret_str)
     return ret_str
+
+def str2time(s):
+    """
+    input could be integer
+    """
+    return datetime.strptime(str(s),'%Y%m%d%H%M%S')
 
 
 def extract_hashtags(tweet):
