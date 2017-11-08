@@ -4,8 +4,7 @@
 import re
 import pandas as pd
 from itertools import combinations
-
-hashtag_re = re.compile(r"#\w+[\w'-]*\w+")
+from nltk.tokenize import TweetTokenizer
 
 
 def checkNaN(data):
@@ -36,23 +35,65 @@ def preprocess_a_tweet(t):
     return ret_str
 
 
-def extract_hashtags(tweets, threshold=0):
-    """ Extract hashtags from tweets and index them. """
+def extract_hashtags(tweet):
+    """ Extract hashtags from tweet.
 
-    tag_count = dict()
+    Parameters
+    ----------
+    tweet : string
+        Raw tweet text.
 
-    # Check if the input is a list/Series of strings
-    if isinstance(tweets, (list, pd.Series)):
-        for tweet in tweets:
-            for tag in re.findall(hashtag_re, tweet.lower()):
-                tag_count[tag] = tag_count.get(tag, 0) + 1
-    else:
-        for tag in re.findall(hashtag_re, tweets.lower()):
-            tag_count[tag] = tag_count.get(tag, 0) + 1
+    Returns
+    -------
+    hashtags : list of strings
+        Tokenized strings starting with '#'.
 
-    # Extract hashtags with count higher than threshold
-    top_tags = {t: c for t, c in tag_count.items() if c > threshold}
-    return top_tags
+    """
+    tknzr = TweetTokenizer()
+    hashtag_re = re.compile(r"#\w+[\w'-]*\w+")
+    hashtags = [token for token in tknzr.tokenize(tweet) if re.match(hashtag_re, token)]
+    return hashtags
+
+
+def vectorize_hashtags(hashtags, tag2id):
+    """ Vectorize hashtags based on co-occurence. """
+
+    for tag_list in hashtags:
+        indices = set([tag2id[tag] for tag in tag_list])
+        print(indices)
+        for pair in combinations(indices, 2):
+            print(pair)
+            # def count_hashtags(hashtags, threshold=0):
+    """ Count hashtags and index them (Bag-of-Words).
+
+    Parameters
+    ----------
+    hashtags : list of strings
+        Tokenized strings starting with '#'.
+
+    threshold : int
+        The minimum count of occurence.
+
+    Returns
+    -------
+    tag_count : dict
+
+    """
+
+    # tag_count = dict()
+
+    # # Check if the input is a list/Series of strings
+    # if isinstance(tweets, (list, pd.Series)):
+    #     for tweet in tweets:
+    #         for tag in re.findall(hashtag_re, tweet.lower()):
+    #             tag_count[tag] = tag_count.get(tag, 0) + 1
+    # else:
+    #     for tag in re.findall(hashtag_re, tweets.lower()):
+    #         tag_count[tag] = tag_count.get(tag, 0) + 1
+
+    # # Extract hashtags with count higher than threshold
+    # top_tags = {t: c for t, c in tag_count.items() if c > threshold}
+    # return top_tags
 
 
 def count_cooccurence(tag_table, word2id):
