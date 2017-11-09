@@ -12,7 +12,7 @@
 [VAST Challenge 2014 MC2](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+2)
 
 ## Main Challenge
-Since we pick **VAST Challenge 2014:** as our final project, we have to deveopled several analytics tools
+Since we pick **VAST Challenge 2014** as our final project, we have to deveopled several analytics tools
 to deal with streaming data. Our system must focus on time series analysis to identify upcoming events or
 suspicious activities. One of the main problems we have to solve is: **How to identify upcoming or suspicious events ?**
 
@@ -101,6 +101,12 @@ We think this combination of visualization will be beneficial for detecting even
 ## Objective 3 - Analyze patten on map
 * package geopandas is required
 * package pyshp is require
+
+Run the following command to visualize the interactive plots:
+
+    bokeh serve --show geo.py
+
+In order to make sense of the data and identify suspicious patterns, we firsly need to plot the whole Abila map and then plot common daily routines for GAStech employees. The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By anlisising routines between different days or hours or minutes of GAStech employees, we can conlude the suspicious patterns.
 
 
 
