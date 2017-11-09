@@ -90,8 +90,8 @@ y2s=np.array(y2s).ravel().tolist()
 lsource=ColumnDataSource(dict(x1=x1s,y1=y1s))
 psource=ColumnDataSource(dict(x2=x2s,y2=y2s))
 p1=figure(title="Abila")
-p1.circle(x='x2',y='y2',source=psource,color='black',size=3)
-p1.multi_line(xs='x1',ys='y1',source=lsource,color='black',line_width=1)
+p1.circle(x='x2',y='y2',source=psource,color='black',size=1)
+p1.multi_line(xs='x1',ys='y1',source=lsource,color='black',line_width=0.5)
 # my_hover = HoverTool()
 # my_hover.tooltips = [("location", "@x2,@y2")]
 # p1.add_tools(my_hover)
@@ -107,32 +107,40 @@ Time.columns=['day','min']
 gps['day']=Time['day']
 gps['min']=Time['min']
 day_map=sorted(gps['day'].unique().tolist())
-day_select=Select(title="Car ID",options=day_map,value='01/06/2014')
-# min_map=sorted(gps['min'].unique().tolist())
-# min_select=Select(title="Car ID",options=min_map,value='00:00:00')
+day_select=Select(title="day",options=day_map,value='01/06/2014')
+min_map=sorted(gps['min'].unique().tolist())
+min_min_select=Select(title="min minutes",options=min_map,value='00:00:00')
+max_min_select=Select(title="max minutes",options=min_map,value='23:59:59')
 
-ID=gps[(gps['id']==1) & (gps['day']=='01/06/2014')]
+ID=gps[(gps['id']==1) & (gps['day']=='01/06/2014')&(gps['min']>='00:00:00')&(gps['min']<='23:59:59')]
+ID2=gps[(gps['id']==1) & (gps['day']=='01/06/2014')]
 source=ColumnDataSource(dict(x=ID['long'],y=ID['lat']))
+source2=ColumnDataSource(dict(x=ID2['long'],y=ID2['lat'],day=ID2['day'],min=ID2['min']))
 
 
 def update(attrname, old, new):
     car_id=ID_map[ID_select.value]
     car_day=day_select.value
-    # car_min=min_select.value
+    min_car_min=min_min_select.value
+    max_car_min=max_min_select.value
     # print(car_id)
-    ID=gps[(gps['id']==car_id )&( gps['day']==car_day)]
+    ID=gps[(gps['id']==car_id )&( gps['day']==car_day)&(gps['min']>=min_car_min)&(max_car_min>=gps['min'])]
+    ID2=gps[(gps['id']==car_id) & (gps['day']==car_day)]
     # print(ID)
     source.data=dict(x=ID['long'],y=ID['lat'])
+    source2.data=dict(x=ID2['long'],y=ID2['lat'],day=ID2['day'],min=ID2['min'])
     # p1.circle(x='x',y='y',source=source,size=1,color='red')
 ID_select.on_change('value',update)
 day_select.on_change('value',update)
-# min_select.on_change('value',update)
-p1.circle(x='x',y='y',source=source,size=1,color='red')
+min_min_select.on_change('value',update)
+max_min_select.on_change('value',update)
+p1.circle(x='x',y='y',source=source,legend="minutestamp",size=5,color='red')
+p1.circle(x='x',y='y',source=source2,legend="daystamp",size=3,color='green')
 my_hover = HoverTool()
-my_hover.tooltips = [("location", "@x,@y"),("Time","@Time")]
+my_hover.tooltips = [("location", "@x,@y"),("day", "@day"),("minutes", "@min")]
 p1.add_tools(my_hover)
 
-layout=column(ID_select,day_select,p1)
+layout=column(ID_select,day_select,min_min_select,max_min_select,p1)
 # show(layout)
 curdoc().add_root(column(p,layout))
 
