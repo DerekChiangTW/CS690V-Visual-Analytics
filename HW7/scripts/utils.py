@@ -35,11 +35,12 @@ def preprocess_a_tweet(t):
     # ret_str = re.sub(r'[0|1|2|3|4|5|6|7|8|9|:]', r'$NUM$', ret_str)
     return ret_str
 
+
 def str2time(s):
     """
     input could be integer
     """
-    return datetime.strptime(str(s),'%Y%m%d%H%M%S')
+    return datetime.strptime(str(s), '%Y%m%d%H%M%S')
 
 
 def extract_hashtags(tweet):
@@ -62,69 +63,27 @@ def extract_hashtags(tweet):
     return hashtags
 
 
-def vectorize_hashtags(hashtags, tag2id):
-    """ Vectorize hashtags based on co-occurence. """
-
-    for tag_list in hashtags:
-        indices = set([tag2id[tag] for tag in tag_list])
-        print(indices)
-        for pair in combinations(indices, 2):
-            print(pair)
-            # def count_hashtags(hashtags, threshold=0):
-    """ Count hashtags and index them (Bag-of-Words).
-
-    Parameters
-    ----------
-    hashtags : list of strings
-        Tokenized strings starting with '#'.
-
-    threshold : int
-        The minimum count of occurence.
-
-    Returns
-    -------
-    tag_count : dict
-
-    """
-
-    # tag_count = dict()
-
-    # # Check if the input is a list/Series of strings
-    # if isinstance(tweets, (list, pd.Series)):
-    #     for tweet in tweets:
-    #         for tag in re.findall(hashtag_re, tweet.lower()):
-    #             tag_count[tag] = tag_count.get(tag, 0) + 1
-    # else:
-    #     for tag in re.findall(hashtag_re, tweets.lower()):
-    #         tag_count[tag] = tag_count.get(tag, 0) + 1
-
-    # # Extract hashtags with count higher than threshold
-    # top_tags = {t: c for t, c in tag_count.items() if c > threshold}
-    # return top_tags
-
-
-def count_cooccurence(tag_table, word2id):
+def count_cooccurence(tag_table, top_tags):
     """ Count the co-occurence of the hashtags.
 
     Parameters
     ----------
-        tweets : list of strings
-            Raw tweet text.
+    tag_table : Series
+        A Series of hashtags in each tweet.
 
-        word2id : dict
-            A look-up dictionary to match the hashtag with indices.
+    tag2id : dict
+        A look-up dictionary to match the hashtag with indices.
 
     Returns
     -------
-        co_occurence : dict
-            A dictionary which counts the co-occurence of hashtags.
-            The keys are tuples of hashtag indices and values are the count.
+    co_occurence : dict
+        A dictionary which counts the co-occurence of hashtags.
 
     """
     co_occurence = dict()
-    for tag_dict in tag_table:
-        indices = sorted([word2id[w] for w in tag_dict.keys() if w in word2id])
+    tag2id = dict(zip(top_tags, range(len(top_tags))))
+    for tag_list in tag_table:
+        indices = [tag2id[t] for t in tag_list if t in top_tags]
         for pair in combinations(indices, 2):
             co_occurence[pair] = co_occurence.get(pair, 0) + 1
-
     return co_occurence
