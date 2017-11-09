@@ -130,7 +130,7 @@ Run the following command to visualize the interactive plots:
 
     bokeh serve --show geo.py
 
-In order to make sense of data and identify suspicious patterns, we need to show routines for GAStech employees on the Abila map. To begin with, we read in .shp file, then transfer linestrings and polygons into points dataframe and draw Abila map in bokeh. 
+In order to make sense of data and identify suspicious patterns, we need to show routines for GAStech employees on the Abila map. To begin with, we read data in .shp file in geodataframe, then transfer linestrings and polygons into points dataframe and draw both Kronos_Island and Abila map in bokeh. 
 
 <img src='./src/images/KI.png' height=500>
 
