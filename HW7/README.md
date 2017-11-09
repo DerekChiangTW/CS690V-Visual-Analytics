@@ -12,7 +12,7 @@
 [VAST Challenge 2014 MC2](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+2)
 
 ## Main Challenge
-Since we pick **VAST Challenge 2014: MC3** as our final project, we have to deveopled several analytics tools
+Since we pick **VAST Challenge 2014:** as our final project, we have to deveopled several analytics tools
 to deal with streaming data. Our system must focus on time series analysis to identify upcoming events or
 suspicious activities. One of the main problems we have to solve is: **How to identify upcoming or suspicious events ?**
 
@@ -100,7 +100,8 @@ We think this combination of visualization will be beneficial for detecting even
 
 ## Objective 3 - Analyze patten on map
 * package geopandas is required
-* packet pyshp is require
+* package pyshp is require
+
 
 
 
