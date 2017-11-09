@@ -106,7 +106,9 @@ Run the following command to visualize the interactive plots:
 
     bokeh serve --show geo.py
 
-In order to make sense of the data and identify suspicious patterns, we firsly need to plot the whole Abila map and then plot common daily routines for GAStech employees. The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By anlisising routines between different days or hours or minutes of GAStech employees, we can conlude the suspicious patterns.
+In order to make sense of the data and identify suspicious patterns, we firstly need to plot the whole Abila map and then plot common daily routines for GAStech employees. The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By analyzing routines between different days or hours or minutes of GAStech employees, we can conclude the suspicious patterns.
+
+<img src='./src/images/patten.png' height=500>
 
 
 
