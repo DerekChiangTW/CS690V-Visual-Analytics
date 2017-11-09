@@ -6,15 +6,14 @@
 3. Jin Zhang
 
 ### Dataset
+* [VAST Challenge 2014 MC2](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+2)
+* [VAST Challenge 2014 MC3](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3)
 
-[VAST Challenge 2014 MC3](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3)
-
-[VAST Challenge 2014 MC2](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+2)
 
 ## Main Challenge
-Since we pick **VAST Challenge 2014** as our final project, we have to deveopled several analytics tools
-to deal with streaming data. Our system must focus on time series analysis to identify upcoming events or
-suspicious activities. One of the main problems we have to solve is: **How to identify upcoming or suspicious events ?**
+Since our team pick **VAST Challenge, 2014** as our final project, we have to develop several analytics tools
+to deal with text, map and streaming data. Our system must focus on time series analysis to identify upcoming events or
+suspicious activities. One of the main problems we have to solve is: **"How to identify upcoming events or suspicious activities ?"**
 
 
 ## Objective 1 - Analyze hashtags in tweets
@@ -22,31 +21,33 @@ suspicious activities. One of the main problems we have to solve is: **How to id
 ### Concept
 
 Hashtags often provide rich information of the tweets, such as locations, activities or organizations.
-It is also easier for users to search relevant content using specific hashtags.
+It is also easier for users to search relevant contents using specific hashtags.
 Thus, our first step is to analyze hashtags to get a clearer picture of what is going on in the tweets.
-We wish to observe the distribution of hashtags to detect upcoming events.
-Moreover, to better understand the relations between hashtags, we draw a co-occurence plot to visualize their
-connections in the tweets. 
+We aim to observe the distribution of hashtags to detect upcoming events. For instance, if a specific hashtag only appeared in a short period of time, we can look into that period of time and investigate.
+
+Moreover, to better understand the relations between hashtags, we draw a co-occurence plot to visualize their connections in the tweets. 
 
 ### Procedure
 
 * Extract hashtags based on regular expression.
 * Construct a weighted, undirected graph based on their co-occurence in the tweets to visualize their relations.
 * Draw a time-series plot to observe the distribution of total counts of hashtags.
-* Plot another time-series distibution of the user-selected hashtag to detect the suspicious events in each time period.
+* Draw another time-series plot to show the distribution of the selected hashtag.
+* Design a tool which can filter the tweets based on hashtags.
 
 
-### Visualizaing Text
+### Visualization
 
+First, we extract hashtags from our dataset and count their co-occurence.
 The co-occurenece graph reveals the relationships between hashtags. We also change the line width to
 indicate the weights of each connections.
 By hovering around the circle, we can clearly understand their relations.
 
-For example, in the VAST dataset, **#POKRally** and **#KronosStar** are highly correlated.
+For example, in the VAST dataset, **#POKRally** and **#KronosStar** are highly correlated. Thus, we will have the sense that these two words have some relations in the tweets.
 
 <img src='./src/images/co_occurence.png' height=450>
 
-The time-series plots can select time period, such as '10Min', '15Min', or 'Hour' to observe different distributions of the counts.
+Next, we plot the distribution of total count of hashtags. The time-series plots can select time period, such as '10Min', '15Min', or 'Hour' to observe different distributions of the counts.
 We can also select a specific hashtag which we are interested in to observe its distribution over time.
 Both of the plots are connected to help visualization.
 
@@ -55,11 +56,19 @@ Both of the plots are connected to help visualization.
 Moreover, we want to use hashtags as filter to search specific tweets. When we are detecting suspicious event, we may want to find all the tweets related to that certain topic or situation to really understand what happened.
 Thus, in the second(below) time-series plot, when we select a hashtag and certain range of time period, we will show the tweets 
 that include the selected hashtag in the text area.
-User can therefore look into the tweets and investigate.
+User can therefore look into the tweets and make further investigation.
 
 <img src='./src/images/tweet_area.png' height=450>
 
+### Difference between VAST and Midterm dataset
+This mini-challenge 3 separates the entire dataset into three segments. We only got the first segment; therefore, the size of the dataset is limited.
+When we draw the co-occurence plot, the connection is sparse.
 
+Moreover, in the VAST dataset, the distribution of specific hashtag tends to be uniform (perhaps we only observe a short range of time). It is not easy and obvious to detect certain event.
+
+However, we can still observe that **#POKRally** related words are important using our tools.
+
+### Code
 Run the following command to visualize the interactive plots:
 
     bokeh serve --show hashtag.py
@@ -119,9 +128,14 @@ As we push forward the time window, we can also easily detect the events that ha
 
 Run the following command to visualize the interactive plots:
 
-    bokeh serve --show geo.py
+    bokeh serve --show geo.py
 
-In order to make sense of the data and identify suspicious patterns, we firsly need to plot the whole Abila map and then plot common daily routines for GAStech employees. The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By anlisising routines between different days or hours or minutes of GAStech employees, we can conlude the suspicious patterns.
+In order to make sense of data and identify suspicious patterns, we need to show routines for GAStech employees on the Abila map. To begin with, we read in .shp file,transfer linestrings into dataframe and draw Abila map in bokeh. Then we plot routines of GAStech employees on the Abila map in bokeh, in which the green line represents the whole day routine while the red routine represent the period routine.
+
+The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By analyzing routines between different days or hours or minutes of GAStech employees, we can conclude the suspicious patterns.
+
+
+<img src='./src/images/pattens.png' height=500>
 
 
 
