@@ -52,7 +52,7 @@ def getPolyCoords(row, geom, coord_type):
 # In[21]:
 
 
-KI=gpd.read_file("Kronos_Island.shp")
+KI=gpd.read_file("./data/VAST-2014-MC3/Geospatial/Kronos_Island.shp")
 KI['x'] = KI.apply(getPolyCoords, geom='geometry', coord_type='x', axis=1)
 KI['y'] = KI.apply(getPolyCoords, geom='geometry', coord_type='y', axis=1)
 KIsource=GeoJSONDataSource(geojson=KI.to_json())
@@ -69,7 +69,7 @@ p.patches('x','y',source=KIsource,fill_color='white',line_color="black", line_wi
 # In[23]:
 
 
-AB=shapefile.Reader("Abila.shp")
+AB=shapefile.Reader("./data/VAST-2014-MC3/Geospatial/Abila.shp")
 x1s=[]
 y1s=[]
 x2s=[]
@@ -96,27 +96,43 @@ p1.multi_line(xs='x1',ys='y1',source=lsource,color='black',line_width=1)
 # my_hover.tooltips = [("location", "@x2,@y2")]
 # p1.add_tools(my_hover)
 # show(p1)
-gps=pd.read_csv('gps.csv')
+gps=pd.read_csv('./data/VAST-2014-MC3/gps.csv')
 ID_map={"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8": 8,"9":9,"10":10,"11":11,"12":12,"13":13,"14":14,"15":15,"16":16,"17": 17,"18":18,"19":19,"20":20,"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28": 28,"29":29,"30":30,"31":31,"32":32,"33":33,"34":34,"35":35}
 ID_select=Select(title="Car ID",options=sorted(ID_map.keys()),value="1")
-ID=gps.loc[gps['id']==1]
-source=ColumnDataSource(dict(x=ID['long'],y=ID['lat'],Time=ID['Timestamp']))
+
+
+Time=gps['Timestamp']
+Time=Time.str.split(' ',1,expand=True)
+Time.columns=['day','min']
+gps['day']=Time['day']
+gps['min']=Time['min']
+day_map=sorted(gps['day'].unique().tolist())
+day_select=Select(title="Car ID",options=day_map,value='01/06/2014')
+# min_map=sorted(gps['min'].unique().tolist())
+# min_select=Select(title="Car ID",options=min_map,value='00:00:00')
+
+ID=gps[(gps['id']==1) & (gps['day']=='01/06/2014')]
+source=ColumnDataSource(dict(x=ID['long'],y=ID['lat']))
 
 
 def update(attrname, old, new):
     car_id=ID_map[ID_select.value]
+    car_day=day_select.value
+    # car_min=min_select.value
     # print(car_id)
-    ID=gps.loc[gps['id']==car_id]
+    ID=gps[(gps['id']==car_id )&( gps['day']==car_day)]
     # print(ID)
-    source.data=dict(x=ID['long'],y=ID['lat'],Time=ID['Timestamp'])
+    source.data=dict(x=ID['long'],y=ID['lat'])
     # p1.circle(x='x',y='y',source=source,size=1,color='red')
 ID_select.on_change('value',update)
+day_select.on_change('value',update)
+# min_select.on_change('value',update)
 p1.circle(x='x',y='y',source=source,size=1,color='red')
 my_hover = HoverTool()
 my_hover.tooltips = [("location", "@x,@y"),("Time","@Time")]
 p1.add_tools(my_hover)
 
-layout=column(ID_select,p1)
+layout=column(ID_select,day_select,p1)
 # show(layout)
 curdoc().add_root(column(p,layout))
 
