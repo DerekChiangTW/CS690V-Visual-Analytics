@@ -128,10 +128,11 @@ Run the following command to visualize the interactive plots:
 
     bokeh serve --show geo.py
 
-In order to make sense of data and identify suspicious patterns, we need to show routines for GAStech employees on the Abila map. To begin with, we read in .shp file,transfer linestrings into dataframe and draw Abila map in bokeh. Then we plot routines of GAStech employees on the Abila map in bokeh, in which the green line represents the whole day routine while the red routine represent the period routine.
+In order to make sense of data and identify suspicious patterns, we need to show routines for GAStech employees on the Abila map. To begin with, we read in .shp file, then transfer linestrings and polygons into points dataframe and draw Abila map in bokeh. 
 
-The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By analyzing routines between different days or hours or minutes of GAStech employees, we can conclude the suspicious patterns.
+<img src='./src/images/KI.png' height=500>
 
+Then we plot routines of GAStech employees on the Abila map in bokeh, in which the green line represents the whole day routine while the red routine represent the period routine.The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By analyzing routines between different days or hours or minutes of GAStech employees, we can conclude the suspicious patterns.
 
 <img src='./src/images/pattens.png' height=500>
 
