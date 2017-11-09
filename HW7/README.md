@@ -44,20 +44,20 @@ By hovering around the circle, we can clearly understand their relations.
 
 For example, in the VAST dataset, **#POKRally** and **#KronosStar** are highly correlated.
 
-<img src='./src/images/co_occurence.png' height=350>
+<img src='./src/images/co_occurence.png' height=450>
 
 The time-series plots can select time period, such as '10Min', '15Min', or 'Hour' to observe different distributions of the counts.
 We can also select a specific hashtag which we are interested in to observe its distribution over time.
 Both of the plots are connected to help visualization.
 
-<img src='./src/images/time_series.png' height=400>
+<img src='./src/images/time_series.png' height=600>
 
 Moreover, we want to use hashtags as filter to search specific tweets. When we are detecting suspicious event, we may want to find all the tweets related to that certain topic or situation to really understand what happened.
 Thus, in the second(below) time-series plot, when we select a hashtag and certain range of time period, we will show the tweets 
 that include the selected hashtag in the text area.
 User can therefore look into the tweets and investigate.
 
-<img src='./src/images/tweet_area.png' height=300>
+<img src='./src/images/tweet_area.png' height=450>
 
 
 Run the following command to visualize the interactive plots:
