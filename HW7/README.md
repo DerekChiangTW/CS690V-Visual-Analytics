@@ -1,20 +1,20 @@
 # Homework 7
 
-**Team members**
+### Team members
 1. Chao-Ching Chiang
 2. Bailin Wang
 3. Jin Zhang
 
-**Datasets**
+### Dataset
 
-[VAST Challenge 2014 Dataset](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3)
+[VAST Challenge 2014 MC3](http://www.vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3)
 
+[TOC]
 
 ## Main Challenge
-Since we pick VAST Challenge 2014: MC3 as our final project, we have to deveopled several analytics tools
+Since we pick **VAST Challenge 2014: MC3** as our final project, we have to deveopled several analytics tools
 to deal with streaming data. Our system must focus on time series analysis to identify upcoming events or
-suspicious activities. The main problem we might have to solve is:
-* how to identify upcoming or suspicious events ?
+suspicious activities. One of the main problems we have to solve is: **How to identify upcoming or suspicious events ?**
 
 
 ## Objective 1 - Analyze hashtags in tweets
@@ -30,12 +30,10 @@ connections in the tweets.
 
 ### Procedure
 
-* Extract hashtags based on regular expression. (We set a threshold to extract the most frequent ones.)
-* Then, we construct a weighted, undirected graph based on their co-occurence in the tweets to visualize their relations.
-* Draw a time-series plot to observe the distribution of total count. The total count is the sum over all the 
-hashtags, which also includes the less frequent ones.
-* Finally, we plot a time-series distibution of the most frequent hashtags individually to detect the suspicious
-events in each time period.
+* Extract hashtags based on regular expression.
+* Construct a weighted, undirected graph based on their co-occurence in the tweets to visualize their relations.
+* Draw a time-series plot to observe the distribution of total counts of hashtags.
+* Plot another time-series distibution of the user-selected hashtag to detect the suspicious events in each time period.
 
 
 ### Visualizaing Text
@@ -44,21 +42,25 @@ The co-occurenece graph reveals the relationships between hashtags. We also chan
 indicate the weights of each connections.
 By hovering around the circle, we can clearly understand their relations.
 
-<img src='./src/images/co_occur.png' height=400>
+For example, in the VAST dataset, **#POKRally** and **#KronosStar** are highly correlated.
 
-The time-series plots can select time unit, such as 'Day', 'Week', or 'Month' to observe different distributions.
-We can also select a specific hashtag to observe its distribution over time.
+<img src='./src/images/co_occurence.png' height=350>
+
+The time-series plots can select time period, such as '10Min', '15Min', or 'Hour' to observe different distributions of the counts.
+We can also select a specific hashtag which we are interested in to observe its distribution over time.
 Both of the plots are connected to help visualization.
 
-<img src='./src/images/time_series.png' height=600>
+<img src='./src/images/time_series.png' height=400>
 
-Users can also select a period of time on the time-series graph. If the hashtags in the co-occurence 
-graph appeared in that period of time, the color of the circle will turn red.
+Moreover, we want to use hashtags as filter to search specific tweets. When we are detecting suspicious event, we may want to find all the tweets related to that certain topic or situation to really understand what happened.
+Thus, in the second(below) time-series plot, when we select a hashtag and certain range of time period, we will show the tweets 
+that include the selected hashtag in the text area.
+User can therefore look into the tweets and investigate.
 
-<img src='./src/images/select.png' height=300>
+<img src='./src/images/tweet_area.png' height=300>
 
 
-Interactive version of it can be see running:
+Run the following command to visualize the interactive plots:
 
     bokeh serve --show hashtag.py
 
