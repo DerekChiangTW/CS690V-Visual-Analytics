@@ -64,12 +64,11 @@ Run the following command to visualize the interactive plots:
 
     bokeh serve --show hashtag.py
 
-
-## Objective 2 - Analyze text in tweets
-* package pandas,sklearn are required.
+## Objective 2 - Text clustering & Sentiment Analysis of Tweets
+* package pandas, sklearn, wordcloud are required.
 * bokeh server is used for visualization
 
-Run the following command to generate the graph(may take a while)
+Run the following command to generate the graph (may take a while)
 
     bokeh serve --show cluster.py
 
@@ -77,28 +76,44 @@ The basic strategy to detect events in tweets is to understand what's happening 
 
 Note that update of the graph after selecting time window may take a while due to the large number of data we use.
 
-### Text Preprocessing of twitter
+### Components
 
-* Remove all emojis and symbols at first
+#### Text Preprocessing of Tweets
+
 * Convert text to lower 
-* URL links are removed
-* User_names are removed
 * Punctuations like #, !, /,\,are removed
 * Tokenization by space
 
-### Clustering
+#### Clustering
 
 Each tweet is represented using word-count vectors based on Bag-of-Word model. Cluster algorithms of KMeans is employed. To visualize the high-dimensional vectors, t-sne is used to reduce the dimensionality to 2d so that they can be easily plotted.
 
-### Explanation
+A slider is used for interactively tuning the number of clusters. Hover tool is also employed such that we can directly see the tweet that each plot represents.
+
+#### Sentiment Analysis
+
+This component is expected to capture sentiment underlying tweets, which could be beneficial for detecting events. We use a naive sentiment classification strategy that if any word in tweet triggers a sentiment lexicon, then it's recognized as positive/negative. Then those tweets with sentiment polarity are filtered to be shown in the visualization. 
+
+#### Word Cloud
+
+Word cloud is also added to capture some keywords.
+
+### Time Window
+
+Note that every component above only shows the tweets that were sent in a specific time range, which is determined by the time value we select. The purpose of this design is that we can easily switch between different time windows since events often happen in a particular time period.
+
+### Event
 
 <img src='./src/images/cluster.png' height=500>
 
-Firstly, we select the time window of tweets. Then with the help of clustering and hover tool, we can easily infer some information from this visualization. For example, the green cluster shown in the graph above mainly talks about prices of products. 
+We found that from 17:00, POK rally took place at Abila City Park. It could be easily detected through the word cloud since these words are frequently used since that time. 
 
-We think this combination of visualization will be beneficial for detecting events in tweets.
+The clustering helps us focus on the tweets that talk about pok rally. And we can use the zoom tool to look into each cluster in detail. For example, as shown in the image above, we found an event that this rally leads to a heavy police presence. From the negative tweets on the right, we can also find that people are also worried about potential security risks.
 
-## Objective 3 - Analyze patten on map
+As we push forward the time window, we can also easily detect the events that happen in the rally, such as introducing guests and music show. The rally remains peaceful till the end without unexpected events occurring.
+
+
+## Objective 3 - Analyze pattern on map
 * package geopandas is required
 * package pyshp is require
 

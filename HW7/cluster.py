@@ -150,7 +150,7 @@ day_select_2.on_change('value', update_time_window)
 
 def update_sentiment(time_stamps, tweets):
     cached = '      Date time                ||        Negative  Tweets       \n'
-    cached += '===============================================================================\n'
+    cached += '      ======================================================================================\n'
     for time_, tweet_ in zip(time_stamps, tweets):
         if negSent(tweet_):
             cached += '      {0}      ||        {1}       \n'.format(str(time_), tweet_)
@@ -158,7 +158,7 @@ def update_sentiment(time_stamps, tweets):
     cached += "\n\n\n"
 
     cached += '      Date time                ||        Positive  Tweets       \n'
-    cached += '===============================================================================\n'
+    cached += '      ======================================================================================\n'
     for time_, tweet_ in zip(time_stamps, tweets):
         if posSent(tweet_):
             cached += '      {0}      ||        {1}       \n'.format(str(time_), tweet_)
