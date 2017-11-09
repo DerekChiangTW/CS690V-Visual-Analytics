@@ -108,7 +108,7 @@ Run the following command to visualize the interactive plots:
 
 In order to make sense of the data and identify suspicious patterns, we firstly need to plot the whole Abila map and then plot common daily routines for GAStech employees. The datasets include two weeks routines for each GAStech employees, which are elaborated in seconds. By analyzing routines between different days or hours or minutes of GAStech employees, we can conclude the suspicious patterns.
 
-<img src='./src/images/routines.png' height=500>
+<img src='./src/images/pattens.png' height=500>
 
 
 
