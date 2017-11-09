@@ -11,9 +11,7 @@
 
 
 ## Main Challenge
-Since our team pick **VAST Challenge, 2014** as our final project, we have to develop several analytics tools
-to deal with text, map and streaming data. Our system must focus on time series analysis to identify upcoming events or
-suspicious activities. One of the main problems we have to solve is: **"How to identify upcoming events or suspicious activities ?"**
+Since our team pick **VAST Challenge, 2014** as our final project, we have to develop several analytics tools to deal with text, map and streaming data. Our system must focus on time series analysis to identify upcoming events or suspicious activities. One of the main problems we have to solve is: **"How to identify upcoming events or suspicious activities?"**
 
 
 ## Objective 1 - Analyze hashtags in tweets
