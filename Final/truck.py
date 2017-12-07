@@ -84,8 +84,8 @@ lat_int=lat_range/i
 long_int=long_range/i
 
 fre_ran=[0,20,70,200,500,100000]
-co=['grey','yellow','orange','red','blue']
-al=[0.5,0.5,0.5,0.5,0.5]
+co=['grey','yellow','orange','red','black']
+al=[0.3,0.5,0.7,0.8,1]
 
 def frequency(data):
     fre=[]
