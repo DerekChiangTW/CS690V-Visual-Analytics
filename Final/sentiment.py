@@ -12,7 +12,7 @@ from bokeh.models.formatters import DatetimeTickFormatter
 from bokeh.models import ColumnDataSource, HoverTool, DatetimeTicker, FactorRange
 from bokeh.models.widgets import Select, DataTable, TableColumn, PreText
 from scripts.sentiment import posSent, negSent, sentScore, getSentWords
-from scripts.utils import extract_hashtags, count_cooccurence
+from scripts.utils import extract_hashtags
 
 # selected_Tags = 25
 pd.options.mode.chained_assignment = None

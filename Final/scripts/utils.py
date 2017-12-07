@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import re
-import pandas as pd
+import operator
+import networkx as nx
 from itertools import combinations
 from datetime import datetime
 from nltk.tokenize import TweetTokenizer
+
+hashtag_re = re.compile(r"#\w+[\w'-]*\w+")
 
 
 def checkNaN(data):
@@ -58,32 +61,28 @@ def extract_hashtags(tweet):
 
     """
     tknzr = TweetTokenizer()
-    hashtag_re = re.compile(r"#\w+[\w'-]*\w+")
-    hashtags = [token for token in tknzr.tokenize(tweet) if re.match(hashtag_re, token)]
+    hashtags = [token.lower() for token in tknzr.tokenize(tweet) if re.match(hashtag_re, token)]
     return hashtags
 
 
-def count_cooccurence(tag_table, top_tags):
-    """ Count the co-occurence of the hashtags.
+def run_pagerank(tag_table, unique_tags, targetNum):
+    """ Run pagerank and return the top hashtags. """
+    id2tag = {i: tag for i, tag in enumerate(unique_tags)}
+    tag2id = {tag: i for i, tag in id2tag.items()}
 
-    Parameters
-    ----------
-    tag_table : Series
-        A Series of hashtags in each tweet.
-
-    tag2id : dict
-        A look-up dictionary to match the hashtag with indices.
-
-    Returns
-    -------
-    co_occurence : dict
-        A dictionary which counts the co-occurence of hashtags.
-
-    """
     co_occurence = dict()
-    tag2id = dict(zip(top_tags, range(len(top_tags))))
     for tag_list in tag_table:
-        indices = [tag2id[t] for t in tag_list if t in top_tags]
+        indices = [tag2id[tag] for tag in tag_list]
         for pair in combinations(indices, 2):
             co_occurence[pair] = co_occurence.get(pair, 0) + 1
-    return co_occurence
+
+    nodes = range(len(unique_tags))
+    edges = [(pair[0], pair[1], weight) for pair, weight in co_occurence.items()]
+    G = nx.Graph()
+    G.add_nodes_from(nodes)
+    G.add_weighted_edges_from(edges)
+    pr = nx.pagerank(G, weight='weight')
+
+    top_indices, top_scores = zip(*sorted(pr.items(), key=operator.itemgetter(1), reverse=True)[:targetNum])
+    topTags = [id2tag[i] for i in top_indices]
+    return topTags
