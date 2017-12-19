@@ -50,8 +50,7 @@ Run the following command to visualize the tweet clustering:
     
     
 ## Video link
-https://umass.box.com/s/y376raa0evophmozariltp18l1h2irbl
-
+https://drive.google.com/open?id=15IF5DkoQ2mmwbnUTkzAJIUP2958bP7jZ
 
 
 
