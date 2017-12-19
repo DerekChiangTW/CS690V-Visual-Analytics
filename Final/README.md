@@ -49,9 +49,6 @@ Run the following command to visualize the tweet clustering:
     bokeh serve --show cluster.py
     
     
-## Video link
-https://umass.box.com/s/y376raa0evophmozariltp18l1h2irbl
-
 
 
 
