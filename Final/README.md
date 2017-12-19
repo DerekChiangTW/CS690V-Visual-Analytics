@@ -8,10 +8,10 @@
 
 ## Content
 * Final_report.pdf
-* Poster.pdf
+* poster.pdf
 * 7 Python scripts
 
-    1. staff.py
+    1. staff.py
     2. truck.py
     3. hashtag.py
     4. sentiment.py
@@ -31,7 +31,7 @@
     
 ### Mini-Challenge 2
 Run the following command to visualize the staff routine:
-
+    
     bokeh serve --show employee.py
  
 Run the following command to visualize the truck routine:
