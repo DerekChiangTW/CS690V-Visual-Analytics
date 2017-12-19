@@ -19,7 +19,7 @@ import datetime
 #------------------------------
 
 # read in shp file
-AB=shapefile.Reader("final/data/VAST-2014-MC3/Geospatial/Abila.shp")
+AB=shapefile.Reader("data/VAST-2014-MC3/Geospatial/Abila.shp")
 x1s=[]
 y1s=[]
 for shape in AB.shapeRecords():
@@ -46,7 +46,7 @@ p1.multi_line(xs='x1',ys='y1',source=lsource,color='black',alpha=1,line_width=0.
 #------------------------------
 
 # read in gps information 
-gps=pd.read_csv('final/data/VAST-2014-MC3/gps.csv')
+gps=pd.read_csv('data/VAST-2014-MC3/gps.csv')
 
 gps=gps[gps['id']>36]
 # split timestamp to day and minutes
