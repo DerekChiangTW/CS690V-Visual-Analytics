@@ -30,6 +30,9 @@
     bokeh serve --show search.py
     
 ### Mini-Challenge 2
+
+* Required Packages: geopandas, pyshp 
+
 Run the following command to visualize the staff routine:
     
     bokeh serve --show employee.py
