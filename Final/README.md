@@ -9,20 +9,21 @@
 ## Content
 * Final_report.pdf
 * Poster.pdf
-* 6 Python scripts
+* 7 Python scripts
     1. staff.py
     2. truck.py
     3. hashtag.py
     4. sentiment.py
     5. cluster.py
     6. rout.py  
+    7. search.py
 
 
 ## Code
 ### Mini-Challenge 1
 Run the following command to visualize the interactive plots:
 
-    bokeh serve --show xxx.py
+    bokeh serve --show search.py
     
 ### Mini-Challenge 2
 Run the following command to visualize the staff routine:
