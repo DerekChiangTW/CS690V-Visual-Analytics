@@ -8,9 +8,9 @@
 
 ## Content
 * Final_report.pdf
-* Poster.pdf
+* poster.pdf
 * 7 Python scripts
-    1. staff.py
+    1. staff.py
     2. truck.py
     3. hashtag.py
     4. sentiment.py
@@ -27,13 +27,13 @@ Run the following command to visualize the interactive plots:
     
 ### Mini-Challenge 2
 Run the following command to visualize the staff routine:
-
-    bokeh serve --show employee.py
+    
+    bokeh serve --show employee.py
  
 Run the following command to visualize the truck routine:
 
-    bokeh serve --show truck.py
-    bokeh serve --show rout.py
+    bokeh serve --show truck.py
+    bokeh serve --show rout.py
     
 ### Mini-Challenge 3
 Run the following command to visualize the distribution of hashtags:
