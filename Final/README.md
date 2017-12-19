@@ -25,7 +25,7 @@
 
 * Required Packages: spacy
 
-* Run the following command to show the search tool:
+Run the following command to show the search tool:
 
     bokeh serve --show search.py
     
@@ -43,6 +43,9 @@ Run the following command to visualize the truck routine:
     bokeh serve --show rout.py
     
 ### Mini-Challenge 3
+* Required Packages: Networkx, wordcloud 
+
+
 Run the following command to visualize the distribution of hashtags:
 
     bokeh serve --show hashtag.py
@@ -57,7 +60,7 @@ Run the following command to visualize the tweet clustering:
     
     
 ## Video link
-https://drive.google.com/open?id=15IF5DkoQ2mmwbnUTkzAJIUP2958bP7jZ
+[Demo](https://drive.google.com/open?id=15IF5DkoQ2mmwbnUTkzAJIUP2958bP7jZ)
 
 
 
