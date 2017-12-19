@@ -4,13 +4,13 @@ from bokeh.models import ColumnDataSource
 from bokeh.models.widgets import Slider, TextInput, Select, PreText, Button, Paragraph, Div
 from bokeh.plotting import figure
 from bokeh.layouts import widgetbox, row, column, layout
-from reader import *
+from scripts.reader import *
 import pdb
 
 
 text = TextInput(title="Keyword", value='leader')
 # ner_select = Select(title="Candidate Entity", value="Henk Bodrogi", options=id2ent + ["None"])
-ner_select = Select(title="Candidate Entity", value="None", options=id2ent + ["None"])
+ner_select = Select(title="Candidate Entity", value="None", options=id2ent + ["APA", "Karel", "None"])
 # cand_text = PreText(text='Search Result: \n', width=1000, height=800)
 cand_text = Div(text='<p>Search Result: <\p>', width=1000, height=800)
 search_icon = Button(label="search", button_type="success", width=100)
@@ -42,7 +42,7 @@ def search(keyword, entity=None):
                     continue
                 ret_str += hightlight(sent, keyword, entity=entity)
             else:
-                print("highlighting")
+                # print("highlighting")
                 ret_str += hightlight(sent, keyword)
 
     return ret_str
@@ -54,13 +54,10 @@ def hightlight(sent, keyword, entity=None):
     raw_str = "<p>"
 
     # related entities
-    ents = []
-    if entity:
-        # pdb.set_trace()
-        ents = [e for e in sent2ent[sent2id[sent]]]
-        ents = set(ents)
-        if entity in ents:
-            ents.remove(entity)
+    ents = [e for e in sent2ent[sent2id[sent]]]
+    ents = set(ents)
+    if entity in ents:
+        ents.remove(entity)
 
     #pdb.set_trace()
     if keyword != "":
@@ -73,13 +70,13 @@ def hightlight(sent, keyword, entity=None):
         tmp = sent[:ent_index] + a_template.format(entity) + sent[ent_index + len(entity):]
         sent = tmp
 
-        for ent in ents:
-            try:
-                ent_index = sent.index(ent)
-                tmp = sent[:ent_index] + c_template.format(ent) + sent[ent_index + len(ent):]
-                sent = tmp
-            except:
-                continue
+    for ent in ents:
+        try:
+            ent_index = sent.index(ent)
+            tmp = sent[:ent_index] + c_template.format(ent) + sent[ent_index + len(ent):]
+            sent = tmp
+        except:
+            continue
     
     raw_str += sent
             
